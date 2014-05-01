@@ -1,4 +1,5 @@
 import sys, string, re
+import matplotlib.pyplot as plt
 
 class HandParse(object):
 	def __init__(self, filename):
@@ -25,7 +26,24 @@ class HandParse(object):
 			profit += float(values[i+1]) - float(values[i])
 			profLi.append(profit)
 		return profLi
+	
+	def plotProfits(self):
+		profLi = self.profitList()
+		plt.plot(profLi)
+		plt.ylabel("Profit")
+		plt.xlabel("Hands")
+		plt.show()
+		
 
 class Tracker(object):
-    pass
+    def __init__(self, handparse):
+		self.hp = handparse
 	
+
+def main():
+	hHist = HandParse(sys.argv[1])
+	hHist.plotProfits()
+	
+
+if __name__ == "__main__":
+	main()
